@@ -1,0 +1,96 @@
+https://futurestud.io/tutorials/understanding-virtuals-in-mongoose
+
+
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user')
+
+
+
+const users = (req,res)=> {
+	User.find().then(
+		(users)=> {
+			res.status(200).json(users);
+		}).catch((error)=> {
+			res.status(400).json({
+				error: error
+			})
+		})
+}
+
+const Singup = (req,res) => {
+	bcrypt.hash(req.body.hashed_password, 10).then(
+		(hash) => {
+			console.log('this is the hash password',hash);
+			const user = new User ({
+				name : req.body.name,
+				email: req.body.email,
+				hashed_password: hash
+
+			});
+
+
+			user.save().then(
+				() => {
+					res.status(201).json({
+						message: "User saved successfully"
+					})
+				}
+				) .catch(
+				(error)=> {
+					throw error;
+					res.status(500).json({						
+						error:error
+					})
+				}
+				)
+		}
+		).catch((error)=> {
+			throw error
+		})
+}
+
+const Login = (req,res) => {
+	User.findOne({email:req.body.email}).then(
+		(user)=> {
+			if(!user) {
+				return res.status(401).json({
+					error: new Error('email does not exist')
+				})
+			}console.log(req.body);
+			 console.log(user.hashed_password);
+
+
+			bcrypt.compare(req.body.hashed_password,user.hashed_password).then(
+				(valid)=> {
+
+					if(!valid) {
+						return res.status(401).json({
+							error: new Error('incorrect passowrd')
+						})
+					}
+
+					const token = jwt.sign({userId : user._id},'RANDOM USER AUTHENTICATION STRING',{expiresIn:'24h'})
+					res.status(200).json({
+						userId: user._id,
+						token : 'token'
+					})
+				}).catch((error)=>{
+					throw error
+					res.status(500).json({
+						error : error
+					})
+				})
+		}).catch((error)=> {
+			throw error
+			res.staus(500).json({
+				error: error
+			})
+		})
+}
+
+
+
+
+
+module.exports = {users,Singup,Login}
