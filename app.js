@@ -8,6 +8,8 @@ const expressValidator = require('express-validator');//makes sure or throws err
 //user routes
 const authRoutes = require('./routes/user');
 const userById = require('./routes/userbyId');
+const cateRoutes = require('./routes/category');
+const productRoute = require('./routes/products')
 
 const app = express();
 require('dotenv').config();
@@ -40,8 +42,10 @@ app.use(expressValidator());
 
 
 //routes middlewares
-app.use('/auth',authRoutes)
-app.use('/user',userById)
+app.use('/auth',authRoutes);
+app.use('/user',userById);
+app.use('/category',cateRoutes);
+app.use('/products',productRoute)
 
 const port = process.env.PORT || 3000
 
