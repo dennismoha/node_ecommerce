@@ -16,6 +16,9 @@ route.get('/secret/:userbyId',requireSignin,isAuth,isAdmin,(req,res)=>{
 	})
 })
 
+route.get('/user/:userbyId',userbyId.profile);
+route.put('/user/:userbyId',userbyId.updateProfile);
+
 
 
 route.param('userbyId',userbyId.userById)

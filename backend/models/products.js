@@ -18,6 +18,7 @@ const productsSchema = new mongoose.Schema({
 	price: {type: Number,  required:true, maxLength:32},
 	category: {type:  mongoose.Schema.Types.ObjectId, ref:'category',required:true},
 	quantity: {type: Number , required:true, required: true},
+	sold:{type: Number, default: 0},
 	photo: { data: Buffer, contentType: String},
 	shipping:{required: false, type: Boolean}
 },{timestamps:true});
