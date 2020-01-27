@@ -1,0 +1,5 @@
+in .env files, make sure the components start with REACT_APP_COMPONENT name
+otherwise it wouldn't work
+
+
+//use npm run start for the .env files to be picked

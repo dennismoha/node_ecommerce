@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+
 const expressValidator = require('express-validator');//makes sure or throws error during login if name or email or password is empty
 
 //user routes
@@ -11,8 +12,9 @@ const userById = require('./routes/userbyId');
 const cateRoutes = require('./routes/category');
 const productRoute = require('./routes/products')
 
+
 const app = express();
-require('dotenv').config();
+require('dotenv').config(); 
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,17 +23,19 @@ app.use((req, res, next) => {
   next();
 })
 
-mongoose.connect(process.env.DATABASE,{
-	useNewUrlParser:true,
-	useCreateIndex: true
-	})
-	.then(()=> {
-		console.log("successfully connected")
-	})
-	.catch((error)=>{
-		console.log("connection unsuccessful")
-		console.error(error);
-	})
+// mongoose.connect(process.env.DATABASE,{
+// 	useNewUrlParser:true,
+// 	useCreateIndex: true
+// 	})
+// 	.then(()=> {
+// 		console.log("successfully connected")
+// 	})
+// 	.catch((error)=>{
+// 		console.log("connection unsuccessful")
+// 		console.error(error);
+// 	})
+
+mongoose.connect('mongodb://localhost:27017/node_eccomerce', {useNewUrlParser: true});
 
 //other middlewares
 app.use(bodyParser.urlencoded({extended: true}));
@@ -39,6 +43,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(expressValidator());
+
 
 
 //routes middlewares
@@ -53,5 +58,5 @@ app.listen(port,(err)=> {
 	if(err) {
 		throw err
 	}
-	console.log('server sucessfully connected')
+	console.log(port);
 })

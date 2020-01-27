@@ -30,16 +30,15 @@ const Singup = (req,res) => {
 
 			user.save().then(
 				() => {
+					
 					res.status(201).json({
-						message: "User saved successfully"
+						message: "user signed up successful"
 					})
 				}
 				) .catch(
 				(error)=> {
 					throw error;
-					res.status(500).json({						
-						error:error
-					})
+					
 				}
 				)
 		}

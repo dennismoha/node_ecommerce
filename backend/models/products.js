@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Schema //needed where the productschema is to read from the category schema
 								//helps in relation from one model to another model
-mongoose.connect("mmongodb+srv://admin:@$$mon254@admin-dzypr.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true})
-	.then(()=> {
-		console.log("successfully connected")
-	})
-	.catch((error)=>{
-		console.log("connection unsuccessful")
-		console.error(error);
-	});
+// mongoose.connect("mmongodb+srv://admin:@$$mon254@admin-dzypr.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true})
+// 	.then(()=> {
+// 		console.log("successfully connected")
+// 	})
+// 	.catch((error)=>{
+// 		console.log("connection unsuccessful")
+// 		console.error(error);
+// 	});
+
+mongoose.connect('mongodb://localhost:27017/node_eccormece', {useNewUrlParser: true});
 
 
 

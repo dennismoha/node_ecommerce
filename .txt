@@ -1,4 +1,5 @@
 /https://futurestud.io/tutorials/understanding-virtuals-in-mongoose
+//to understand more on react router == -->https://codeburst.io/getting-started-with-react-router-5c978f70df91
 
 
 const bcrypt = require('bcrypt');

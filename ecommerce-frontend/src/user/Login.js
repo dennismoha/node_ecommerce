@@ -1,5 +1,14 @@
 import React from 'react';
+import Layout from '../core/layout' //make sure the component is in caps
+import {API} from '../config'
+const Login = () => (
 
-const Login = () => <div>login</div>
+	<Layout title="login page" description="this is the login page">
+		{API}
+		
+	</Layout>
+
+	)
+
 
 export default Login;

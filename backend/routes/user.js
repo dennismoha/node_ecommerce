@@ -5,7 +5,8 @@ const Signupvalidator = require('../validator/index')
 const router = express.Router();
 
 router.get('/test/',requireSignin.users)
-router.post('/Signup/',Signupvalidator,auth.Singup)
+// router.post('/Signup/',Signupvalidator,auth.Singup)
+router.post('/Singup/',auth.Singup)
 router.post('/login/',auth.Login)
 router.get('/signout/',auth.Signout)
 
